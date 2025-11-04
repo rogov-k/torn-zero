@@ -1,0 +1,14 @@
+#!/bin/bash
+
+FILE=$1
+
+printf "[%s]\t%s\n" "$(date +'%H:%M:%S')" 'Used 5 energy for searching'
+if cat "$FILE" | jq -e '.success == true' > /dev/null
+then
+  printf "\t\tStatus:\t\t%s\n" 'Success'
+  printf "\t\tItem:\t\t%s\n" "$(jq -r '.item.name' "$FILE")"
+else
+  printf "\t\tStatus:\t\t%s\n" 'Fail'
+fi
+
+printf "\t\tResponse:\t%s\n" "$(basename "$FILE")"

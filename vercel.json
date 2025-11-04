@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "outputDirectory": ".",
+  "functions": {
+    "api/counter/index.sh": {
+      "runtime": "vercel-bash@4.2.0"
+    }
+  }
+}

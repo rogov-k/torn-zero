@@ -1,0 +1,15 @@
+#!/bin/bash
+
+RATE=$1
+TYPE=$2
+
+RESET="\033[0m"
+BOLD="\033[1m"
+DIM="\033[2m"
+
+TIMESTAMP=$(date +"%H:%M:%S")
+
+printf "%b[%s]%b %b%s%b %b- %s%b\n" \
+  "$DIM" "$TIMESTAMP" "$RESET" \
+  "$BOLD" "$RATE" "$RESET" \
+  "$DIM" "$TYPE" "$RESET"

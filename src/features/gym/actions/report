@@ -1,0 +1,22 @@
+#!/bin/bash
+
+FILE=$1
+TYPE_ID=$2
+
+case "$TYPE_ID" in
+defense) TYPE_NAME="Defense" ;;
+speed) TYPE_NAME="Speed" ;;
+dexterity) TYPE_NAME="Dexterity" ;;
+strength) TYPE_NAME="Strength" ;;
+*) TYPE_NAME="Unknown" ;;
+esac
+
+if jq -e '.success == false' "$FILE" > /dev/null; then
+  rm -rf "$FILE"
+  exit 0
+fi
+
+if jq -e '.gainMessage' "$FILE" > /dev/null; then
+  NEW_VALUE=$(jq -r .stat.newValue "$FILE")
+  features/common/actions/report_skill "$NEW_VALUE" "$TYPE_NAME"
+fi

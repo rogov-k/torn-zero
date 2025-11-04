@@ -1,0 +1,48 @@
+#!/bin/bash
+
+PIDS=()
+
+source .env
+
+rm -rf .torn
+mkdir -p .torn/logs
+
+[ "$DO_CRIME" = true ] && {
+  ( while :; do ./features/crime/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+  PIDS+=($!)
+}
+
+[ "$DO_DUMP" = true ] && {
+  ( while :; do ./features/dump/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+  PIDS+=($!)
+}
+
+[ "$DO_GYM" = true ] && {
+  ( while :; do ./features/gym/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+  PIDS+=($!)
+}
+
+[ "$DO_CASINO" = true ] && {
+  ( while :; do
+    if [[ -f .torn/casino.lock ]]; then
+      break
+    fi
+    ./features/casino/use-cases/do
+    sleep "$SLEEP_TIME"
+  done ) &
+  PIDS+=($!)
+}
+
+cleanup() {
+  for pid in "${PIDS[@]}"; do
+    if kill -0 "$pid" 2>/dev/null; then
+      kill "$pid" 2>/dev/null || true
+      kill -9 "$pid" 2>/dev/null || true
+    fi
+  done
+
+  exit 0
+}
+trap cleanup SIGINT SIGTERM
+
+wait

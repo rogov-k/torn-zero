@@ -1,0 +1,8 @@
+#!/bin/bash
+
+FILE_NAME_1=$(openssl rand -hex 16)
+features/dump/actions/search >> "$TORN_HOME/logs/$FILE_NAME_1"
+
+FILE_NAME_2=$(openssl rand -hex 16)
+features/dump/actions/pick_up >> "$TORN_HOME/logs/$FILE_NAME_2"
+features/dump/actions/report "$TORN_HOME/logs/$FILE_NAME_2"

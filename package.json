@@ -1,0 +1,11 @@
+{
+  "name": "torn-zero",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 33",
+    "play": "cd src && ./play",
+    "test": "src/test",
+    "start": "vercel -d dev",
+    "deploy:prod": "vercel --prod"
+  }
+}

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+curl -s 'https://www.torn.com/item.php' \
+  -H "Cookie: PHPSESSID=$PHPSESSID" \
+  -H "Cookie: cf_clearance=$CF_CLEARANCE" \
+  -H "User-agent: $USER_AGENT" \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'step=getCategoryList&itemName=Material' \
+  | jq '.list[0]'

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+JSON="$(features/crime/actions/info "$FILE")"
+echo "$JSON" | jq 'first(.DB.crimesByType.[] | select(.secretsAvailable == 1) | .commitID)'

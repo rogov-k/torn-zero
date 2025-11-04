@@ -1,0 +1,27 @@
+#!/bin/bash
+
+AMOUNT=$1
+DESCRIPTION=$2
+
+RESET="\033[0m"
+BOLD="\033[1m"
+DIM="\033[2m"
+GREEN="\033[1;32m"
+RED="\033[1;31m"
+
+TIMESTAMP=$(date +"%H:%M:%S")
+
+if (( $(echo "$AMOUNT < 0" | bc -l) )); then
+  SIGN="-"
+  COLOR="$RED"
+  VALUE=$(echo "$AMOUNT" | awk '{printf "%.2f", -$1}')
+else
+  SIGN="+"
+  COLOR="$GREEN"
+  VALUE=$(echo "$AMOUNT" | awk '{printf "%.2f", $1}')
+fi
+
+printf "%b[%s]%b %b%s\$%s%b %b- %s%b\n" \
+  "$DIM" "$TIMESTAMP" "$RESET" \
+  "$COLOR$BOLD" "$SIGN" "$VALUE" "$RESET" \
+  "$DIM" "$DESCRIPTION" "$RESET"

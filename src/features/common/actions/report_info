@@ -1,0 +1,14 @@
+#!/bin/bash
+
+NAME=$1
+
+RESET="\033[0m"
+BOLD="\033[1m"
+DIM="\033[2m"
+CYAN="\033[36m"
+
+TIMESTAMP=$(date +"%H:%M:%S")
+
+printf "%b[%s]%b %b%s%b\n" \
+  "$DIM" "$TIMESTAMP" "$RESET" \
+  "$CYAN$BOLD" "$NAME" "$RESET"

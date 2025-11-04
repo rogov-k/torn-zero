@@ -1,0 +1,62 @@
+#!/bin/bash
+
+FILE=$1
+CRIME_TYPE_ID=$2
+TYPE_ID=$3
+
+case "$CRIME_TYPE_ID" in
+1) CRIME_TYPE_NAME="Trash" ;;
+2) CRIME_TYPE_NAME="Subway" ;;
+3) CRIME_TYPE_NAME="Junkyard" ;;
+4) CRIME_TYPE_NAME="Beach" ;;
+*) CRIME_TYPE_NAME="Unknown" ;;
+esac
+
+case "$TYPE_ID" in
+1) TYPE_NAME="Search for Cash" ;;
+2) TYPE_NAME="Bootlegging" ;;
+*) TYPE_NAME="Unknown" ;;
+esac
+
+
+if jq -e '.DB.outcome.result == "error"' "$FILE" >/dev/null; then
+  rm -rf "$FILE"
+  exit 0
+fi
+
+if jq -e '.success == false' "$FILE" >/dev/null; then
+  printf "\t\tReason:\t\t%s\n" "$(jq -r '.error' "$FILE")"
+  printf "\t\tResponse:\t%s\n" "$(basename "$FILE")"
+fi
+
+if jq -e '.DB.outcome.result == "success"' "$FILE" >/dev/null; then
+  if jq -e '.DB.outcome.rewards[]? | select(.type=="money")' "$FILE" >/dev/null; then
+    MONEY="$(jq -r '.DB.outcome.rewards[] | select(.type=="money") | .value' "$FILE")"
+    features/common/actions/report_money "$MONEY" "$TYPE_NAME -> $CRIME_TYPE_NAME"
+  fi
+
+  if jq -e '.DB.outcome.rewards[] | select(.type=="items")' "$FILE" >/dev/null; then
+    jq -r '.DB.outcome.rewards[] | select(.type=="items") | .value[] | "\(.id)\t\(.amount)"' "$FILE"\
+      | while IFS=$'\t' read -r ID AMOUNT; do
+        features/common/actions/report_item "$ID" "$AMOUNT"
+      done
+  fi
+
+  if jq -e '.DB.outcome.rewards[] | select(.type=="other")' "$FILE" >/dev/null; then
+    ITEM="$(jq -r '.DB.outcome.rewards[]? | select(.type=="other") | .text' "$FILE")"
+    features/common/actions/report_info "$ITEM"
+  fi
+fi
+
+if jq -e '.DB.outcome.result == "failure"' "$FILE" >/dev/null; then
+  rm -rf "$FILE"
+  exit 0
+fi
+
+if jq -e '.DB.outcome.result == "critical failure"' "$FILE" >/dev/null; then
+  printf "Status:\t\t%s\n" 'Critical failure'
+
+  if jq -e '.DB.outcome.rewards[] | (.value|tostring)' &>/dev/null; then
+    printf "\t\tReason:\t\t%s\n" "$FAIL_REASON"
+  fi
+fi

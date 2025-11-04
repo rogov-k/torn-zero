@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curl -s "https://www.torn.com/page.php?sid=slotsData&step=play&stake=$CASINO_STEP" \
+  -H "Cookie: PHPSESSID=$PHPSESSID" \
+  -H "Cookie: cf_clearance=$CF_CLEARANCE" \
+  -H "User-agent: $USER_AGENT"
