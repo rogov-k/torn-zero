@@ -1,4 +1,5 @@
 .idea
+.torn
 .vercel
-/src/.torn
-/src/.env
+.editorconfig
+.env

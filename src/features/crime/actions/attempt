@@ -2,8 +2,9 @@
 
 CRIME_TYPE_ID=$1
 CRIME_ID=$2
+VALUE1=$3
 
-curl -s "https://www.torn.com/page.php?sid=crimesData&step=attempt&typeID=$CRIME_ID&crimeID=$CRIME_TYPE_ID&value1=$VALUE1" \
+curl -s "https://www.torn.com/page.php?sid=crimesData&step=attempt&typeID=$CRIME_TYPE_ID&crimeID=$CRIME_ID&value1=$VALUE1" \
   -H "Cookie: PHPSESSID=$PHPSESSID" \
   -H "Cookie: cf_clearance=$CF_CLEARANCE" \
   -H "User-agent: $USER_AGENT"

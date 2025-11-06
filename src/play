@@ -7,18 +7,23 @@ source .env
 rm -rf .torn
 mkdir -p .torn/logs
 
-[ "$DO_CRIME" = true ] && {
-  ( while :; do ./features/crime/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+[ "$SEARCH_FOR_CASH" = true ] && {
+  ( while :; do src/features/crime/use-cases/searchforcash; sleep "$SLEEP_TIME"; done ) &
+  PIDS+=($!)
+}
+
+[ "$BOOTLEGGING" = true ] && {
+  ( while :; do src/features/crime/use-cases/bootlegging; sleep "$SLEEP_TIME"; done ) &
   PIDS+=($!)
 }
 
 [ "$DO_DUMP" = true ] && {
-  ( while :; do ./features/dump/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+  ( while :; do src/features/dump/use-cases/do; sleep "$SLEEP_TIME"; done ) &
   PIDS+=($!)
 }
 
 [ "$DO_GYM" = true ] && {
-  ( while :; do ./features/gym/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+  ( while :; do src/features/gym/use-cases/do; sleep "$SLEEP_TIME"; done ) &
   PIDS+=($!)
 }
 
@@ -27,7 +32,7 @@ mkdir -p .torn/logs
     if [[ -f .torn/casino.lock ]]; then
       break
     fi
-    ./features/casino/use-cases/do
+    src/features/casino/use-cases/do
     sleep "$SLEEP_TIME"
   done ) &
   PIDS+=($!)

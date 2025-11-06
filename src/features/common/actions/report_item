@@ -2,13 +2,14 @@
 
 ITEM_ID=$1
 AMOUNT=$2
+DESCRIPTION=$3
 
 FILE_NAME=$(openssl rand -hex 16)
-features/common/actions/get_item_info "$ITEM_ID" >>"$TORN_HOME/logs/$FILE_NAME"
+src/features/common/actions/get_item_info "$ITEM_ID" >>"$TORN_HOME/logs/$FILE_NAME"
 
-NAME="$(jq -r .items[0].name "$TORN_HOME/logs/$FILE_NAME")"
-TYPE="$(jq -r .items[0].type "$TORN_HOME/logs/$FILE_NAME")"
-ID="$(jq .items[0].id "$TORN_HOME/logs/$FILE_NAME")"
+NAME="$(jq -r .name "$TORN_HOME/logs/$FILE_NAME")"
+TYPE="$(jq -r .type "$TORN_HOME/logs/$FILE_NAME")"
+ID="$(jq .id "$TORN_HOME/logs/$FILE_NAME")"
 
 RESET="\033[0m"
 BOLD="\033[1m"
@@ -17,9 +18,10 @@ CYAN="\033[36m"
 
 TIMESTAMP=$(date +"%H:%M:%S")
 
-printf "%b[%s]%b %b#%s%b %b%s%b %bx%s%b %b- %s%b\n" \
+printf "%b[%s]%b %b%s%b %b#%s%b %b%s%b %bx%s%b %b- %s%b\n" \
   "$DIM" "$TIMESTAMP" "$RESET" \
+  "$DIM" "$TYPE" "$RESET" \
   "$BOLD" "$ID" "$RESET" \
   "$CYAN$BOLD" "$NAME" "$RESET" \
   "$DIM" "$AMOUNT" "$RESET" \
-  "$DIM" "$TYPE" "$RESET"
+  "$DIM" "$DESCRIPTION" "$RESET"

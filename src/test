@@ -1,25 +1,3 @@
 #!/bin/bash
 
-pwd
-#source .env
-
-# features/crime/actions/report "$TORN_HOME/logs/bd6ea2ad98b0f7eda843eaeade75ff20" "$CRIME_TYPE_ID" "$CRIME_ID"
-#features/common/actions/get_items_list
-#features/common/actions/report_item 347 1
-
-# ********
-# GET-ITEM
-# ********
-
-#ITEM_COST_STRING="$(features/common/actions/get_item_info 347 | jq .itemCost)"
-#ITEM_COST="$(features/common/actions/get_item_price "$ITEM_COST_STRING")"
-#echo "ITEM_COST=$ITEM_COST"
-#echo "itemValue=$ITEM_COST"
-#echo "itemSell=$ITEM_COST"
-
-#JSON="$(curl -sX 'GET' \
-#  'https://api.torn.com/v2/torn/26/items?sort=ASC&key=vjUmOqFP3iiHEUfW' \
-#  -H 'accept: application/json' \
-#  | jq .items[0].value.market_price)"
-#
-#echo "$JSON"
+source .env

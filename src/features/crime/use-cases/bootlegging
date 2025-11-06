@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FILE_NAME=$(openssl rand -hex 16)
+TARGET_ID=$(src/features/crime/actions/get_bootlegging_target_id)
+
+src/features/crime/actions/attempt 2 8 "$TARGET_ID" >>"$TORN_HOME/logs/$FILE_NAME"
+src/features/crime/actions/report "$TORN_HOME/logs/$FILE_NAME" 2 "$CRIME_ID"

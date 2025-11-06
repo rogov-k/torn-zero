@@ -1,7 +1,9 @@
 #!/bin/bash
 
-curl -s "https://www.torn.com/page.php?sid=crimesData&step=hub" \
+CRIME_TYPE_ID=$1
+
+curl -s "https://www.torn.com/page.php?sid=crimesData&step=crimesList&typeID=$CRIME_TYPE_ID" \
   -H "Cookie: PHPSESSID=$PHPSESSID" \
   -H "Cookie: cf_clearance=$CF_CLEARANCE" \
-  -H "User-agent: $USER_AGENT" \
-  | jq .DB.user
+  -H "User-agent: $USER_AGENT"
+

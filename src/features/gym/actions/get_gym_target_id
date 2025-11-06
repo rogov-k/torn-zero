@@ -1,9 +1,8 @@
 #!/bin/bash
 
-curl -s 'https://www.torn.com/item.php?step=getCategoryList&itemName=Material' \
+curl -s 'https://www.torn.com/gym.php?step=getInitialGymInfo' \
   -H "Cookie: PHPSESSID=$PHPSESSID" \
   -H "Cookie: cf_clearance=$CF_CLEARANCE" \
   -H "User-agent: $USER_AGENT" \
   -H 'x-requested-with: XMLHttpRequest' \
-  --data-raw 'itemName=Material' \
-  | jq '.list'
+  --data-raw '{"step":"getInitialGymInfo"}'

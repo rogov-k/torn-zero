@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Получаем JSON
+JSON=$(src/features/crime/actions/info 2 | jq -r '.DB.generalInfo.CDs')
+
+# Инициализируем минимальное значение и ключ
+min_value=""
+min_key=""
+
+# Проходим по ключам 1–8
+for i in {1..8}; do
+  # Пытаемся получить значение ключа, если его нет — присваиваем 0
+  value=$(echo "$JSON" | jq -r --arg i "$i" '.[$i] // 0')
+
+  # Если ключ реально отсутствует — считаем это как минимальный приоритет
+  if ! echo "$JSON" | jq -e --arg i "$i" 'has($i)' > /dev/null; then
+    echo "$i"
+    exit 0
+  fi
+
+  # Инициализация минимального значения
+  if [ -z "$min_value" ] || [ "$value" -lt "$min_value" ]; then
+    min_value="$value"
+    min_key="$i"
+  fi
+done
+
+echo "$min_key"

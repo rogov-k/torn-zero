@@ -8,7 +8,7 @@ for TYPE in "${ALL_TYPES[@]}"; do
 
   if [ "$VALUE" = "true" ]; then
     FILE_NAME=$(openssl rand -hex 16)
-    features/gym/actions/step "$TYPE" >> "$TORN_HOME/logs/$FILE_NAME"
-    features/gym/actions/report "$TORN_HOME/logs/$FILE_NAME" "$TYPE"
+    src/features/gym/actions/step "$TYPE" >> "$TORN_HOME/logs/$FILE_NAME"
+    src/features/gym/actions/report "$TORN_HOME/logs/$FILE_NAME" "$TYPE"
   fi
 done

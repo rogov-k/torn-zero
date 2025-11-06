@@ -18,5 +18,5 @@ fi
 
 if jq -e '.gainMessage' "$FILE" > /dev/null; then
   NEW_VALUE=$(jq -r .stat.newValue "$FILE")
-  features/common/actions/report_skill "$NEW_VALUE" "$TYPE_NAME"
+  src/features/common/actions/report_skill "$NEW_VALUE" "$TYPE_NAME"
 fi

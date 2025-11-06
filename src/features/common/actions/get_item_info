@@ -2,4 +2,4 @@
 
 ITEM_ID=$1
 
-curl -s "https://api.torn.com/v2/torn/$ITEM_ID/items?sort=ASC&key=$API_KEY"
+curl -s "https://api.torn.com/v2/torn/$ITEM_ID/items?sort=ASC&key=$API_KEY" | jq .items[0]

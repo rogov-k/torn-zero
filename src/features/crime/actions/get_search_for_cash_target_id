@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#src/features/crime/actions/info 1 | jq '.DB.crimesByType'
+#exit 0
+
+src/features/crime/actions/info 1 | jq '.DB.crimesByType |
+map(
+  select(
+    (
+      (.requirements?.items | not) or
+      (.requirements?.items | all(.available == true and (.count >= .requiredAmount)))
+    ) and
+    .requirements?.minCrimeLevel?.available != false
+  )
+) |
+max_by(.additionalInfo.barValue).crimeID
+'

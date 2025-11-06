@@ -1,8 +1,8 @@
 {
-  "version": 2,
-  "outputDirectory": ".",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "./api",
   "functions": {
-    "api/counter/index.sh": {
+    "api/play/index.sh": {
       "runtime": "vercel-bash@4.2.0"
     }
   }

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-JSON="$(features/crime/actions/info "$FILE")"
-echo "$JSON" | jq 'first(.DB.crimesByType.[] | select(.secretsAvailable == 1) | .commitID)'
+src/features/crime/actions/info 5 "$FILE" \
+  | jq 'first(.DB.crimesByType.[] | select(.secretsAvailable == 1) | .commitID)'

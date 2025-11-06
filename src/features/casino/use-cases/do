@@ -1,14 +1,14 @@
 #!/bin/zsh
 
 FILE_NAME_1=$(openssl rand -hex 16)
-features/casino/actions/info >>"$TORN_HOME/logs/$FILE_NAME_1"
+src/features/casino/actions/info >>"$TORN_HOME/logs/$FILE_NAME_1"
 if jq -e '.tokens == 0' "$TORN_HOME/logs/$FILE_NAME_1" >/dev/null; then
   touch .torn/casino.lock
   exit 0
 fi
 
 FILE_NAME_2=$(openssl rand -hex 16)
-features/casino/actions/slot_machine MONEY >>"$TORN_HOME/logs/$FILE_NAME_2"
+src/features/casino/actions/slot_machine MONEY >>"$TORN_HOME/logs/$FILE_NAME_2"
 
 MONEY=$(jq -r '.moneyWon' "$TORN_HOME/logs/$FILE_NAME_2")
-features/common/actions/report_money "$((MONEY - CASINO_STEP))" Casino
+src/features/common/actions/report_money "$((MONEY - CASINO_STEP))" "Casino - Slot machine"

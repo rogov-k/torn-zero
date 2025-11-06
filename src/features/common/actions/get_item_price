@@ -1,9 +1,0 @@
-#!/bin/bash
-
-STRING=$1
-
-if [[ "$STRING" != "N/A" && "$STRING" != "null" && -n "$STRING" ]]; then
-  if [[ $(echo "$STRING" | tr -d '$,') =~ '^[0-9]+$' ]]; then
-    echo "$STRING" | tr -d '$,'
-  fi
-fi

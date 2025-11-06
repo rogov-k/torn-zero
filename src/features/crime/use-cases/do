@@ -1,6 +1,0 @@
-#!/bin/bash
-
-FILE_NAME=$(openssl rand -hex 16)
-
-features/crime/actions/attempt "$CRIME_TYPE_ID" "$CRIME_ID" >> "$TORN_HOME/logs/$FILE_NAME"
-features/crime/actions/report "$TORN_HOME/logs/$FILE_NAME" "$CRIME_TYPE_ID" "$CRIME_ID"
