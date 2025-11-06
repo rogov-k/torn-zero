@@ -32,8 +32,8 @@ if jq -e '.DB.outcome.result == "success"' "$FILE" >/dev/null; then
   fi
 
   if jq -e '.DB.outcome.rewards[] | select(.type=="items")' "$FILE" >/dev/null; then
-    jq -r '.DB.outcome.rewards[] | select(.type=="items") | .value[] | "\(.id)\t\(.amount)"' "$FILE"\
-      | while IFS=$'\t' read -r ID AMOUNT; do
+    jq -r '.DB.outcome.rewards[] | select(.type=="items") | .value[] | "\(.id)\t\(.amount)"' "$FILE" |
+      while IFS=$'\t' read -r ID AMOUNT; do
         src/features/common/actions/report_item "$ID" "$AMOUNT" "$CRIME_TYPE_NAME"
       done
   fi

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FILE_NAME=$(openssl rand -hex 16)
-src/features/common/actions/get_user_info >> "$TORN_HOME/logs/$FILE_NAME"
+src/features/common/actions/get_user_info >>"$TORN_HOME/logs/$FILE_NAME"
 SERVER_TIMESTAMP=$(jq -r '.statusIcons.icons.hospital.serverTimestamp' "$TORN_HOME/logs/$FILE_NAME")
 TIMER_EXPIRES_AT=$(jq -r '.statusIcons.icons.hospital.timerExpiresAt' "$TORN_HOME/logs/$FILE_NAME")
 

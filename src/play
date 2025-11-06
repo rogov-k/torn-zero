@@ -8,33 +8,45 @@ rm -rf .torn
 mkdir -p .torn/logs
 
 [ "$SEARCH_FOR_CASH" = true ] && {
-  ( while :; do src/features/crime/use-cases/searchforcash; sleep "$SLEEP_TIME"; done ) &
+  (while :; do
+    src/features/crime/use-cases/searchforcash
+    sleep "$SLEEP_TIME"
+  done) &
   PIDS+=($!)
 }
 
 [ "$BOOTLEGGING" = true ] && {
-  ( while :; do src/features/crime/use-cases/bootlegging; sleep "$SLEEP_TIME"; done ) &
+  (while :; do
+    src/features/crime/use-cases/bootlegging
+    sleep "$SLEEP_TIME"
+  done) &
   PIDS+=($!)
 }
 
 [ "$DO_DUMP" = true ] && {
-  ( while :; do src/features/dump/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+  (while :; do
+    src/features/dump/use-cases/do
+    sleep "$SLEEP_TIME"
+  done) &
   PIDS+=($!)
 }
 
 [ "$DO_GYM" = true ] && {
-  ( while :; do src/features/gym/use-cases/do; sleep "$SLEEP_TIME"; done ) &
+  (while :; do
+    src/features/gym/use-cases/do
+    sleep "$SLEEP_TIME"
+  done) &
   PIDS+=($!)
 }
 
 [ "$DO_CASINO" = true ] && {
-  ( while :; do
+  (while :; do
     if [[ -f .torn/casino.lock ]]; then
       break
     fi
     src/features/casino/use-cases/do
     sleep "$SLEEP_TIME"
-  done ) &
+  done) &
   PIDS+=($!)
 }
 

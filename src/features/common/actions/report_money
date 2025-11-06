@@ -11,7 +11,7 @@ RED="\033[1;31m"
 
 TIMESTAMP=$(date +"%H:%M:%S")
 
-if (( $(echo "$AMOUNT < 0" | bc -l) )); then
+if (($(echo "$AMOUNT < 0" | bc -l))); then
   SIGN="-"
   COLOR="$RED"
   VALUE=$(echo "$AMOUNT" | awk '{printf "%.2f", -$1}')

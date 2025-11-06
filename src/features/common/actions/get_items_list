@@ -5,5 +5,5 @@ curl -s 'https://www.torn.com/item.php?step=getCategoryList&itemName=Material' \
   -H "Cookie: cf_clearance=$CF_CLEARANCE" \
   -H "User-agent: $USER_AGENT" \
   -H 'x-requested-with: XMLHttpRequest' \
-  --data-raw 'itemName=Material' \
-  | jq '.list'
+  --data-raw 'itemName=Material' |
+  jq '.list'

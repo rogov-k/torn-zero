@@ -13,7 +13,7 @@ for i in {1..8}; do
   value=$(echo "$JSON" | jq -r --arg i "$i" '.[$i] // 0')
 
   # Если ключ реально отсутствует — считаем это как минимальный приоритет
-  if ! echo "$JSON" | jq -e --arg i "$i" 'has($i)' > /dev/null; then
+  if ! echo "$JSON" | jq -e --arg i "$i" 'has($i)' >/dev/null; then
     echo "$i"
     exit 0
   fi

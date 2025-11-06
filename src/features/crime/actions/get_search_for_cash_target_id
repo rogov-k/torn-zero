@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#src/features/crime/actions/info 1 | jq '.DB.crimesByType'
-#exit 0
-
 src/features/crime/actions/info 1 | jq '.DB.crimesByType |
 map(
   select(
