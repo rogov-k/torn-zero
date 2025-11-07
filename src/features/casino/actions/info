@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -s 'https://www.torn.com/page.php?rfcv=6905bb22d27ae&sid=slotsData&step=userinfo' \
+curl -s 'https://www.torn.com/page.php?sid=slotsData&step=userinfo' \
   -H "Cookie: PHPSESSID=$PHPSESSID" \
   -H "Cookie: cf_clearance=$CF_CLEARANCE" \
   -H "User-agent: $USER_AGENT" \

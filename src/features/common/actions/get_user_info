@@ -1,7 +1,0 @@
-#!/bin/bash
-
-curl -s 'https://www.torn.com/sidebarAjaxAction.php?q=getSidebarData' \
-  -H "Cookie: PHPSESSID=$PHPSESSID" \
-  -H "Cookie: cf_clearance=$CF_CLEARANCE" \
-  -H "User-agent: $USER_AGENT" \
-  --data-raw '{"fullUrl":"https://www.torn.com/profiles.php?XID=3985321"}'

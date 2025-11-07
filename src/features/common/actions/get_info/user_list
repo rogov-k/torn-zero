@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PAGE=$1
+
+curl -s "https://www.torn.com/page.php?sid=UserListAjax&start=$PAGE" \
+  -H "Cookie: PHPSESSID=$PHPSESSID" \
+  -H "Cookie: cf_clearance=$CF_CLEARANCE" \
+  -H "User-agent: $USER_AGENT"

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#echo '{'
+#echo '  "success": false,'
+#echo '  "error": "This page is not available while in hospital"'
+#echo '}'
+
 CRIME_TYPE_ID=$1
 
 curl -s "https://www.torn.com/page.php?sid=crimesData&step=crimesList&typeID=$CRIME_TYPE_ID" \

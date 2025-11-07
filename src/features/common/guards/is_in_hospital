@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FILE="$1"
+ERROR_MSG=$(jq -r '.error // empty' "$FILE")
+
+if [[ "$ERROR_MSG" == "This page is not available while in hospital" ]]; then
+  echo "true"
+else
+  echo "false"
+fi

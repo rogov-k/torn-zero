@@ -1,3 +1,17 @@
 #!/bin/bash
 
 source .env
+
+src/features/common/actions/get_info/user_list 2184775 \
+  | jq '.list | map(.userID)' \
+  | xargs -n1 src/features/common/actions/get_info/user \
+  | jq '({
+      id: .user.userID,
+      name: .user.playerName,
+      level: .userInformation.level,
+      doable: .competitionStatus.message// "" | contains("Paper"),
+    })
+    | select(.level > 3)
+    | select(.level < 10)
+    | select(.doable == true)
+   '

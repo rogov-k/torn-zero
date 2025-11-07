@@ -1,0 +1,8 @@
+#!/bin/bash
+
+KEY=$1
+VALUE=$2
+
+curl "$UPSTASH_REDIS_REST_URL/set/$KEY" \
+  -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN" \
+  -d "$VALUE"

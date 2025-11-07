@@ -5,7 +5,7 @@ AMOUNT=$2
 DESCRIPTION=$3
 
 FILE_NAME=$(openssl rand -hex 16)
-src/features/common/actions/get_item_info "$ITEM_ID" >>"$TORN_HOME/logs/$FILE_NAME"
+src/features/common/actions/get_info/item "$ITEM_ID" >>"$TORN_HOME/logs/$FILE_NAME"
 
 NAME="$(jq -r .name "$TORN_HOME/logs/$FILE_NAME")"
 TYPE="$(jq -r .type "$TORN_HOME/logs/$FILE_NAME")"

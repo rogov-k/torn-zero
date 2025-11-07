@@ -28,19 +28,19 @@ fi
 if jq -e '.DB.outcome.result == "success"' "$FILE" >/dev/null; then
   if jq -e '.DB.outcome.rewards[]? | select(.type=="money")' "$FILE" >/dev/null; then
     MONEY="$(jq -r '.DB.outcome.rewards[] | select(.type=="money") | .value' "$FILE")"
-    src/features/common/actions/report_money "$MONEY" "$CRIME_TYPE_NAME"
+    src/features/common/actions/report/money "$MONEY" "$CRIME_TYPE_NAME"
   fi
 
   if jq -e '.DB.outcome.rewards[] | select(.type=="items")' "$FILE" >/dev/null; then
     jq -r '.DB.outcome.rewards[] | select(.type=="items") | .value[] | "\(.id)\t\(.amount)"' "$FILE" |
       while IFS=$'\t' read -r ID AMOUNT; do
-        src/features/common/actions/report_item "$ID" "$AMOUNT" "$CRIME_TYPE_NAME"
+        src/features/common/actions/report/item "$ID" "$AMOUNT" "$CRIME_TYPE_NAME"
       done
   fi
 
   if jq -e '.DB.outcome.rewards[] | select(.type=="other")' "$FILE" >/dev/null; then
     ITEM="$(jq -r '.DB.outcome.rewards[]? | select(.type=="other") | .text' "$FILE")"
-    src/features/common/actions/report_info "$ITEM"
+    src/features/common/actions/report/info "$ITEM"
   fi
 fi
 

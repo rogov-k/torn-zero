@@ -11,4 +11,4 @@ FILE_NAME_2=$(openssl rand -hex 16)
 src/features/casino/actions/slot_machine MONEY >>"$TORN_HOME/logs/$FILE_NAME_2"
 
 MONEY=$(jq -r '.moneyWon' "$TORN_HOME/logs/$FILE_NAME_2")
-src/features/common/actions/report_money "$((MONEY - CASINO_STEP))" "Casino - Slot machine"
+src/features/common/actions/report/money "$((MONEY - CASINO_STEP))" "Slot machine"
