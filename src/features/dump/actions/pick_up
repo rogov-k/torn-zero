@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -s 'https://www.torn.com/dump.php?step=pickUp&rfcv=68fbfcf24e086' \
+curl -s 'https://www.torn.com/dump.php?step=pickUp' \
   -H 'accept: */*' \
   -H 'accept-language: ru,en;q=0.9' \
   -H 'baggage: sentry-trace_id=f96225ff0fc24c34aac32b6cff541701,sentry-sample_rate=0.00025,sentry-transaction=%2Fdump.php,sentry-public_key=a78f3131e2934d6dbfe3e3d4acea7ee4,sentry-release=torn%407938331b845836ac12534589f86a7e0d49829017,sentry-environment=production,sentry-sampled=false,sentry-sample_rand=0.680611' \

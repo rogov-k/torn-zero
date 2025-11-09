@@ -2,6 +2,11 @@
 
 FILE_NAME=$(openssl rand -hex 16)
 CRIME_ID="$(src/features/crime/actions/get_search_for_cash_target_id)"
+NERVE=$(src/features/common/actions/get_info/stats | jq -r .bars.nerve.amount)
+
+if (( NERVE < 2 )); then
+  exit 1
+fi
 
 src/features/crime/actions/attempt 1 "$CRIME_ID" >>"$TORN_HOME/logs/$FILE_NAME"
 src/features/crime/actions/report "$TORN_HOME/logs/$FILE_NAME" 1 "$CRIME_ID"

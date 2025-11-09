@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -s 'https://www.torn.com/dump.php?step=search&rfcv=68fbfcf24e086' \
+curl -s 'https://www.torn.com/dump.php?step=search' \
   -X 'POST' \
   -H 'accept: */*' \
   -H 'accept-language: ru,en;q=0.9' \

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+ENERGY=$(src/features/common/actions/get_info/stats | jq -r .bars.energy.amount)
+
+if (( ENERGY < 5 )); then
+  exit 1
+fi
+
 ALL_TYPES=('defense' 'speed' 'dexterity' 'strength')
 
 for TYPE in "${ALL_TYPES[@]}"; do
